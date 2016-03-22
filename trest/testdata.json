@@ -1,0 +1,74 @@
+[
+  {
+    "route": "/hello",
+    "method": "GET",
+    "messages": [
+      {
+        "title": "should return c d when a b",
+        "req": {
+          "objectA": "a",
+          "objectB": "b"
+        },
+
+        "res": {
+          "objectC": "c",
+          "objectD": "d"
+        }
+      },
+      {
+        "title": "should say hallo when greeted with silence",
+        "req": {},
+        "res": {
+          "content": "hallo"
+        }
+      }
+    ]
+  },
+
+  {
+    "route": "/hello2",
+    "method": "POST",
+    "messages": [
+      {
+        "req": {
+          "objectA": "a2",
+          "objectB": "b2"
+        },
+
+        "res": {
+          "objectC": "c2",
+          "objectD": "d2"
+        }
+      },
+      {
+        "req": {},
+        "res": {
+          "content": "hallo2"
+        }
+      }
+    ]
+  },
+  {
+    "route": "/del",
+    "method": "delete",
+    "messages": [
+      {
+        "req": {
+          "objectA": "a2",
+          "objectB": "b2"
+        },
+
+        "res": {
+          "objectC": "c2",
+          "objectD": "d2"
+        }
+      },
+      {
+        "req": {},
+        "res": {
+          "content": "hallo2"
+        }
+      }
+    ]
+  }
+]
