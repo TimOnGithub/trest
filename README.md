@@ -60,4 +60,4 @@ You can run the script with mocha:
 
 In the shell *mocha testAPI.js*
 
-When all tests parse you can be optimistic that your backend will serve the frontend what it expects.
+When all tests pass you can be optimistic that your backend will serve the frontend what it expects.
