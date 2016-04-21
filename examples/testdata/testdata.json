@@ -4,9 +4,11 @@
     "method": "GET",
     "messages": [
       {
-        "title": "should return c d when a b",
+
+        "title": "should return c d when regex /ab+c/ and b",
+        
         "req": {
-          "objectA": "a",
+          "objectA": "/ab+d+c/",
           "objectB": "b"
         },
 

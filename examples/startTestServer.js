@@ -1,4 +1,10 @@
 const trest = require("../index");
+const express = require("express");
 
 //set up server
-var server = new trest.Server(require("./testdata/testdata.json"), 3004);
+var trestServer = new trest.Server(require("./testdata/testdata.json"));
+var app = trestServer.getApp();
+app.get("/tu", function(req, res) {
+  res.send("tutu");
+})
+app.listen(3004);
