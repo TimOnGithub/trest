@@ -1,7 +1,7 @@
 ### trest
-the little helper for developing and **t**esting **rest**ful APIs
+the little helper for developing and testing restful APIs
 
-####describe your routes in json
+#####describe your routes in json
 ```js
 [
   {
@@ -30,11 +30,47 @@ the little helper for developing and **t**esting **rest**ful APIs
   }
 ] 
 ```
+#####or describe your routes in javascript with trest.Route and trest.Message
+```js
+let loginRoute = new trest.Route("/login", "post");
+
+let validRequest = {
+  "username": "pete",
+  "pw": "1234"
+};
+
+let invalidRequest = {
+  "username": "pete",
+  "pw": "4321"
+};
+
+let validResponse = {
+  "success": true,
+  "content": {}
+};
+
+let invalidResponse = {
+  "success": false,
+  "content": "Username and password do not match"
+}
+
+let validLoginMessage = new trest.Message(validRequest, validResponse);
+validLoginMessage.setTitle("valid login example");
+loginRoute.addMessage(validLoginMessage);
+
+let invalidLoginMessage = new trest.Message(invalidRequest, invalidResponse, "invalid login")
+loginRoute.addMessage(invalidLoginMessage);
+
+let trestData = [];
+trestData.push(loginRoute);
+module.exports = trestData;
+```
+
 ####Make Testsever
 Use defined routes to create a testserver.
 ```js
 const trest = require("trest");
-var testData = require("./testdata/testdata.json");
+var testData = require("./testdata/testdata");
 var serverPort = 3004;
 var server = new trest.Server(testData, serverPort); //start up server
 ```
@@ -53,6 +89,7 @@ const trest = require("trest");
 var testData = require("./testdata/testdata.json");
 var server = new trest.Server(testData);
 var app = server.getApp();
+//use app for registering your own routes
 app.listen(3004);
 ```
 
@@ -66,6 +103,8 @@ Disable trest routes for a specific message with "ignore":"server".
         ...
 ```
 then get express app with trest.Server.getApp() and register your implemented routes.
+
+If you are using trest.Message you can call message.ignoreServer().
 
 ####Test your API
 Use defined routes to generate mocha tests for the api.
@@ -83,7 +122,9 @@ In the shell *mocha testAPI.js*
 
 When all tests pass you can be optimistic that your backend will serve the frontend what it expects.
 
-If you want to ignore one test route message but still want to use it for the server use "ignore": "tester"
+If you want to ignore one test route message but still want to use it for the server use "ignore": "tester".
+
+If you are using trest.Message you can call message.ignoreTester().
 
 ####RegExp
 Trest now supports regular expressions in req, define them as Strings in your json: "/{REGEXP}/" e.g. "/ab+c+d/
